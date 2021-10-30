@@ -1,6 +1,7 @@
 package com.example.handmade.models;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -11,7 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-
+@NoArgsConstructor
 
 public class WishList {
     @Id
@@ -21,6 +22,8 @@ public class WishList {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Product> productList;
 
-    public WishList() {
+    public WishList(int clientID) {
+        ClientID = clientID;
+
     }
 }

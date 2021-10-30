@@ -20,4 +20,8 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String body;
+
+    public Review(String body) {
+        this.body = body;
+    }
 }

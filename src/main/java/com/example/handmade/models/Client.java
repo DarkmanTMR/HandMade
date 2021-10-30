@@ -34,4 +34,9 @@ public class Client {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @ToString.Exclude
     private List<Order> orders;
+
+    public Client(String name, String lastName) {
+        this.name = name;
+        this.lastName = lastName;
+    }
 }

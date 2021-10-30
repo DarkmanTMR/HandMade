@@ -1,9 +1,6 @@
 package com.example.handmade.models;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,4 +17,9 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private OrderStatus orderStatus;
+
+    public Order(int id, OrderStatus orderStatus) {
+        this.id = id;
+        this.orderStatus = orderStatus;
+    }
 }
