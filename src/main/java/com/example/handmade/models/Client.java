@@ -24,9 +24,11 @@ public class Client {
     private Gender gender;
     private String country;
     private String settlement;
+    private String password;
     private String email;
     private boolean status;
-    @Transient
+    private boolean isActivated = false;
+        @Transient
     private WishList wishlist;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @ToString.Exclude
