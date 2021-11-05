@@ -8,11 +8,11 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.util.List;
 
-
+@Entity
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
+
 
 public class WishList {
     @Id

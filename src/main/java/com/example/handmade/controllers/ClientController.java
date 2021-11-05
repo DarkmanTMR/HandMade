@@ -2,6 +2,7 @@ package com.example.handmade.controllers;
 
 
 import com.example.handmade.dao.ClientDAO;
+import com.example.handmade.helpers.ClientHelper;
 import com.example.handmade.models.Client;
 import com.example.handmade.models.Order;
 import com.example.handmade.models.WishList;
@@ -18,6 +19,7 @@ import java.util.List;
 public class ClientController {
     private ClientDAO clientDAO;
     private MailService mailService;
+    private ClientHelper clientHelper;
 
     @PostMapping
     private Client saveClient(@RequestBody Client client){
@@ -27,10 +29,15 @@ public class ClientController {
 
     @PostMapping("/registration")
     public void clientRegistration(@RequestBody Client client){
-            clientDAO.save(client);
+          client.setActivationToken(clientHelper.tokenizer(client, "bobobo"));
+        clientDAO.save(client);
             mailService.sendMessage(client);
     }
 
+    @GetMapping("/activate/{token}")
+    public void activate (@PathVariable String token) {
+    Client client = clientDAO.findByAuthToken(token);
+    }
 
     @GetMapping("/{id}")
     public  Client getClient(@PathVariable int id){
@@ -62,5 +69,6 @@ public class ClientController {
     public WishList getClientsWishList(@PathVariable int id){
         return clientDAO.findById(id).get().getWishlist();
     }
+
 
 }

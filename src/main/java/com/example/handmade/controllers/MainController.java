@@ -5,6 +5,5 @@ public class MainController {
 
     }
 }
-// TODO: 31.10.2021
-//  registration
-//  mailSending
+// TODO: helper
+//  security

@@ -28,6 +28,8 @@ public class Client {
     private String email;
     private boolean status;
     private boolean isActivated = false;
+    private String activationToken;
+    private String loginToken;
         @Transient
     private WishList wishlist;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
