@@ -8,10 +8,10 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.util.List;
 
+@Table(name = "product")
 @Entity
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 public class Product {
     @Id
@@ -20,7 +20,7 @@ public class Product {
     private String name;
     private double price;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Picture> pictures;
+    private List<Picture> pictures; //load file
     private String description;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Review> reviewList;

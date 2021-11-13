@@ -1,18 +1,16 @@
 package com.example.handmade.models;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
+@Table(name = "client")
 @Entity
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
+@AllArgsConstructor
 
 public class Client {
     @Id
@@ -29,6 +27,7 @@ public class Client {
     private boolean status;
     private boolean isActivated = false;
     private String activationToken;
+    private String authToken;
     private String loginToken;
         @Transient
     private WishList wishlist;

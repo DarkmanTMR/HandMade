@@ -5,5 +5,7 @@ public class MainController {
 
     }
 }
-// TODO: helper
-//  security
+// TODO: load file!!!! picture
+//  product + column adress image
+//   client +ema
+//    client activation

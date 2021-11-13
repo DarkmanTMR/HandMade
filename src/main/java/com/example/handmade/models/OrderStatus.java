@@ -4,5 +4,5 @@ public enum OrderStatus {
     InProgress,
     Completed,
     Canceled,
-    NotExist;
+    NotExist
 }

@@ -8,6 +8,7 @@ import com.example.handmade.models.Order;
 import com.example.handmade.models.WishList;
 import com.example.handmade.services.MailService;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping("/clients")
 @CrossOrigin(origins = {"http://localhost:4200"})
+
 public class ClientController {
     private ClientDAO clientDAO;
     private MailService mailService;
@@ -26,18 +28,6 @@ public class ClientController {
         return clientDAO.save(client);
     }
 
-
-    @PostMapping("/registration")
-    public void clientRegistration(@RequestBody Client client){
-          client.setActivationToken(clientHelper.tokenizer(client, "bobobo"));
-        clientDAO.save(client);
-            mailService.sendMessage(client);
-    }
-
-    @GetMapping("/activate/{token}")
-    public void activate (@PathVariable String token) {
-    Client client = clientDAO.findByAuthToken(token);
-    }
 
     @GetMapping("/{id}")
     public  Client getClient(@PathVariable int id){
@@ -70,5 +60,16 @@ public class ClientController {
         return clientDAO.findById(id).get().getWishlist();
     }
 
+    @PostMapping("/registration")
+    public void clientRegistration(@RequestBody Client client){
+          client.setActivationToken(clientHelper.tokenizer(client, "bobobo"));
+        clientDAO.save(client);
+            mailService.sendMessage(client);
+    }
+
+    @GetMapping("/activate/{token}")
+    public void activate (@PathVariable String token) {
+    Client client = clientDAO.findByAuthToken(token);
+    }
 
 }

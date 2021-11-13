@@ -18,6 +18,7 @@ public class ProductController {
 
     @PostMapping
     private Product addProduct(@RequestBody Product product){
+        System.out.println(product);
         return productDAO.save(product);
     }
 

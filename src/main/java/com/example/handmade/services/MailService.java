@@ -26,7 +26,7 @@ public class MailService {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
         try {
-            mimeMessage.setFrom(new InternetAddress(Objects.requireNonNull(env.getProperty("spring.mail.username"))));
+            mimeMessage.setFrom(new InternetAddress((env.getRequiredProperty("spring.mail.username"))));
             helper.setTo(client.getEmail());
             helper.setText("<h1>Hello "+ client.getName() +"</h1> <div> your login is-"+client.getName()+ " </div>" , true);
         } catch (MessagingException e) {

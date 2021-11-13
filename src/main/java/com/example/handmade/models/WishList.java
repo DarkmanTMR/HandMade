@@ -8,6 +8,7 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.util.List;
 
+@Table(name = "wish_list")
 @Entity
 @Getter
 @Setter
