@@ -6,6 +6,4 @@ public class MainController {
     }
 }
 // TODO: load file!!!! picture
-//  product + column adress image
-//   client +ema
-//    client activation
+//  product + column address image
