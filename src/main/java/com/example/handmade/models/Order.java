@@ -15,7 +15,7 @@ public class Order {
     @Column(name="orders_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
     @Column(name = "client_id")
     private Integer clientId;
     @Column(name = "order_status")

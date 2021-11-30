@@ -5,20 +5,30 @@ import com.example.handmade.dao.ClientDAO;
 import com.example.handmade.helpers.ClientHelper;
 import com.example.handmade.models.Client;
 import com.example.handmade.models.Order;
+import com.example.handmade.models.OrderStatus;
 import com.example.handmade.models.WishList;
+//import com.example.handmade.services.ClientService;
 import com.example.handmade.services.MailService;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+@EnableSwagger2
+@Service
 @RestController
 @AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @RequestMapping("/clients")
 @CrossOrigin(origins = {"http://localhost:4200"})
 
@@ -26,6 +36,9 @@ public class ClientController {
     private ClientDAO clientDAO;
     private MailService mailService;
     private ClientHelper clientHelper;
+    private PasswordEncoder passwordEncoder;
+//    private ClientService clientService;
+
 
     @PostMapping
     private Client saveClient(@RequestBody Client client) {
@@ -69,12 +82,12 @@ public class ClientController {
         return clientDAO.findById(id).get().getWishlist();
     }
 
-    @PostMapping("/registration")
-    public void clientRegistration(@RequestBody Client client) {
-        client.setActivationToken(clientHelper.tokenizer(client, "bobobo"));
-        clientDAO.save(client);
-        mailService.sendMessage(client);
-    }
+//    @PostMapping("/registration")
+//    public void clientRegistration(@RequestBody Client client) {
+//        client.setActivationToken(clientHelper.tokenizer(client, "bobobo"));
+//        clientDAO.save(client);
+//        mailService.sendMessage(client);
+//    }
 
     @GetMapping("/activate/{token}")
     public void activate(@PathVariable String token) {
@@ -99,6 +112,13 @@ public class ClientController {
             return responseEntity;
         }
         return new ResponseEntity<String>("wrong credentials", HttpStatus.UNAUTHORIZED);
+    }
+
+    @PostMapping("/registration")
+    public void registration (@RequestBody Client client){
+    String encode = passwordEncoder.encode(client.getPassword());
+    client.setPassword(encode);
+    clientDAO.save(client);
     }
 
 }

@@ -18,9 +18,12 @@ import java.util.List;
 public class WishList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
+    @Column(name = "ClientID")
     private int ClientID;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Column(name = "productList")
     private List<Product> productList;
 
     public WishList(int clientID) {
