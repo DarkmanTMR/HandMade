@@ -16,8 +16,11 @@ import java.util.List;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "price")
     private double price;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Picture> pictures; //load file
