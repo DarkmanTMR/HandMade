@@ -35,14 +35,14 @@ public class Client {
     private String email;
     @Column(name = "status")
     private boolean status;
-    @Column(name = "isActivated")
-    private boolean isActivated = false;
-    @Column(name = "activationToken")
-    private String activationToken;
-    @Column(name = "authToken")
-    private String authToken;
-    @Column(name = "loginToken")
-    private String loginToken;
+//    @Column(name = "isActivated")
+//    private boolean isActivated = false;
+//    @Column(name = "activationToken")
+//    private String activationToken;
+//    @Column(name = "authToken")
+//    private String authToken;
+//    @Column(name = "loginToken")
+//    private String loginToken;
             @Transient
     private WishList wishlist;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
