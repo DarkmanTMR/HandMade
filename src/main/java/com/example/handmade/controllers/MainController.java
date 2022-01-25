@@ -7,5 +7,3 @@ public class MainController {
 
     }
 }
-// TODO: load file!!!! picture
-//  product + column address image

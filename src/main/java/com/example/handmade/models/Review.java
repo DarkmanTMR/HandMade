@@ -20,6 +20,7 @@ public class Review {
     private int id;
     @Column(name = "body")
     private String body;
+    private int clientId;
 
     public Review(String body) {
         this.body = body;

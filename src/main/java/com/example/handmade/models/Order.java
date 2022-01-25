@@ -1,7 +1,9 @@
 package com.example.handmade.models;
 
-import lombok.*;
-
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -10,6 +12,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
+
 @NoArgsConstructor
 public class Order {
     @Column(name="orders_id")

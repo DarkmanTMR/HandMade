@@ -5,8 +5,7 @@ import com.example.handmade.dao.ClientDAO;
 import com.example.handmade.models.Client;
 import com.example.handmade.models.Order;
 import com.example.handmade.models.WishList;
-//import com.example.handmade.services.MailService;
-//import com.example.handmade.helpers.ClientHelper;
+import com.example.handmade.services.ClientService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,23 +19,24 @@ import java.util.Optional;
 
 public class ClientController {
     private ClientDAO clientDAO;
+    private ClientService clientService;
 //    private MailService mailService;
 //    private ClientHelper clientHelper;
 
     @PostMapping
     private Client saveClient(@RequestBody Client client) {
-        return clientDAO.save(client);
+        return clientService.save(client);
     }
 
 
     @GetMapping("/{id}")
     public Client getClient(@PathVariable int id) {
-        return clientDAO.findById(id).orElse(new Client("John", "Doe"));
+        return clientService.findById(id).orElse(new Client("John", "Doe"));
     }
 
     @GetMapping
     public List<Client> allClients(){
-        return clientDAO.findAll();
+        return clientService.findAll();
 
 //    public List<Client> allClients(HttpServletRequest httpServletRequest) {
 //    String authenticationHeader = httpServletRequest.getHeader("Authentication");
@@ -49,23 +49,23 @@ public class ClientController {
 
     @PatchMapping
     public Client editClient(@RequestBody Client clientFromRequest) {
-        Optional<Client> clientFromDB = clientDAO.findById(clientFromRequest.getId());
-        return clientDAO.save(clientFromRequest);
+        Optional<Client> clientFromDB = clientService.findById(clientFromRequest.getClientId());
+        return clientService.save(clientFromRequest);
     }
 
     @DeleteMapping("/{id}")
     public void deleteClient(@PathVariable int id) {
-        clientDAO.deleteById(id);
+        clientService.deleteById(id);
     }
 
     @GetMapping("/{id}/orders")
     public List<Order> getClientsOrders(@PathVariable int id) {
-        return clientDAO.findById(id).get().getOrders();
+        return clientService.findById(id).get().getOrders();
     }
 
     @GetMapping("/{id}/wishList")
     public WishList getClientsWishList(@PathVariable int id) {
-        return clientDAO.findById(id).get().getWishlist();
+        return clientService.findById(id).get().getWishlist();
     }
 
 //    @PostMapping("/registration")

@@ -2,10 +2,12 @@ package com.example.handmade.controllers;
 
 import com.example.handmade.dao.WishListDAO;
 import com.example.handmade.models.WishList;
+import com.example.handmade.services.WishListService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
@@ -13,31 +15,32 @@ import java.util.List;
 @CrossOrigin(origins = {"http://localhost:4200"})
 public class WishListController {
     private WishListDAO wishListDAO;
+    private WishListService wishListService;
 
     @PostMapping
     private WishList createWishList(@RequestBody WishList wishList){
-        return wishListDAO.save(wishList);
+        return wishListService.save(wishList);
     }
 
     @GetMapping("/{id}")
     public WishList getWishList(@PathVariable int id){
-        return  wishListDAO.findById(id).orElse(new WishList(0));
+        return  wishListService.findById(id).orElse(new WishList(0,0));
     }
 
     @GetMapping
     public List<WishList> allWishLists(){
-        return wishListDAO.findAll();
+        return wishListService.findAll();
     }
 
    @PatchMapping
     public WishList editWishList(@RequestBody WishList wishListFromRequest){
-        WishList wishListFromDB = wishListDAO.getById((wishListFromRequest.getId()));
-        return wishListDAO.save(wishListFromDB);
+        Optional<WishList> wishListFromDB = wishListService.findById((wishListFromRequest.getId()));
+        return wishListService.save(wishListFromRequest);
    }
 
    @DeleteMapping("/{id}")
     public void deleteWishList(@PathVariable int id){
-        wishListDAO.deleteById(id);
+        wishListService.deleteById(id);
    }
 
 

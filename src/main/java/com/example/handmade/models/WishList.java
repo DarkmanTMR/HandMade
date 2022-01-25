@@ -3,7 +3,6 @@ package com.example.handmade.models;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
@@ -19,12 +18,12 @@ public class WishList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int ClientID;
+    private int ClientId;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Product> productList;
 
-    public WishList(int clientID) {
-        ClientID = clientID;
-
+    public WishList(int id, int clientId) {
+        this.id = id;
+        ClientId = clientId;
     }
 }
