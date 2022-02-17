@@ -7,7 +7,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.List;
 
-@Table(name = "product")
+@Table(name = "products")
 @Entity
 @Getter
 @Setter
@@ -16,7 +16,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int productId;
+    private int id;
     @Column(name = "name")
     private String name;
     @Column(name = "price")

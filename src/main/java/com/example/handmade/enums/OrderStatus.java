@@ -1,4 +1,4 @@
-package com.example.handmade.models;
+package com.example.handmade.enums;
 
 public enum OrderStatus {
     InProgress,

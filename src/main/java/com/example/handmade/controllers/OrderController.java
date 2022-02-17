@@ -1,48 +1,38 @@
 package com.example.handmade.controllers;
 
-
-import com.example.handmade.dao.OrderDAO;
+import com.example.handmade.models.Client;
 import com.example.handmade.models.Order;
-import com.example.handmade.models.OrderStatus;
 import com.example.handmade.services.OrderService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
 @RequestMapping("/orders")
 @CrossOrigin(origins = {"http://localhost:4200"})
 public class OrderController {
-    private OrderDAO orderDAO;
-    private OrderService orderService;
+        private OrderService orderService;
 
-    @PostMapping
-    private Order addOrder(@RequestBody Order order){
-        return orderService.save(order);
-    }
 
-    @GetMapping("/id")
-    public Order getOrder(@PathVariable int id){
-        return orderService.findById(id).orElse(new Order(100500,100500,OrderStatus.NotExist));
-    }
+        @GetMapping("/{id}")
+        public Order getOrder(@PathVariable int id){
+                return orderService.getOrder(id);
+        }
 
-    @GetMapping
-    public List<Order> allOrders(){
-        return orderService.findAll();
-    }
+        @GetMapping("/")
+        public List<Order> getAllOrders(@RequestBody Client client){
+                return orderService.ordersList(client);
+        }
 
-    @DeleteMapping("/{id}")
-    public void deleteOrder(@PathVariable int id){
-        orderService.deleteById(id);
-    }
+        @PostMapping("/")
+        public Order placeOrder(@RequestBody Client client){
+              return orderService.placeOrder(client);
+        }
 
-    @PatchMapping
-    public Order editOrder(@RequestBody Order orderFromRequest){
-        Optional<Order> orderFromDB = orderService.findById(orderFromRequest.getId());
-        return orderService.save(orderFromRequest);
-    }
-
+        @DeleteMapping("/{id}")
+        public void  deleteOrder(@PathVariable int id){
+                orderService.deleteOrderById(id);
+        }
 }

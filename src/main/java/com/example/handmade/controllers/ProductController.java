@@ -36,7 +36,7 @@ public class ProductController {
 
     @PatchMapping
     public Product editProduct(@RequestBody Product product){
-        Optional<Product> productFromDB = productService.findById(product.getProductId());
+        Optional<Product> productFromDB = productService.findById(product.getId());
         return productService.save(product);
     }
 

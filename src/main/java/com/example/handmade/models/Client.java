@@ -1,11 +1,13 @@
 package com.example.handmade.models;
 
+import com.example.handmade.enums.Gender;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Table(name = "client")
+@Table(name = "clients")
 @Entity
 @Getter
 @Setter
@@ -16,13 +18,14 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private int clientId;
+    private int id;
     @Column(name = "Name")
     private String name;
     @Column(name = "lastName")
     private String lastName;
-    @Column(name = "birthday")
-    private int birthday;
+    @Column(name = "birthdate")
+    @JsonFormat(pattern = "dd-mm-yyyy")
+    private int birthdate;
     @Column(name = "gender")
     private Gender gender;
     @Column(name = "country")
@@ -56,4 +59,6 @@ public class Client {
         this.name = name;
         this.lastName = lastName;
     }
+
+
 }

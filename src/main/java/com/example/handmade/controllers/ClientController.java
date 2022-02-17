@@ -1,16 +1,13 @@
 package com.example.handmade.controllers;
 
 
-import com.example.handmade.dao.ClientDAO;
 import com.example.handmade.models.Client;
 import com.example.handmade.models.Order;
-import com.example.handmade.models.WishList;
 import com.example.handmade.services.ClientService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
@@ -18,39 +15,29 @@ import java.util.Optional;
 @CrossOrigin(origins = {"http://localhost:4200"})
 
 public class ClientController {
-    private ClientDAO clientDAO;
-    private ClientService clientService;
+      private ClientService clientService;
 //    private MailService mailService;
 //    private ClientHelper clientHelper;
 
     @PostMapping
     private Client saveClient(@RequestBody Client client) {
-        return clientService.save(client);
+        return clientService.saveClient(client);
     }
 
 
     @GetMapping("/{id}")
-    public Client getClient(@PathVariable int id) {
-        return clientService.findById(id).orElse(new Client("John", "Doe"));
+    public Client getClientById(@PathVariable int id) {
+        return clientService.findClientById(id);
     }
 
     @GetMapping
-    public List<Client> allClients(){
+    public List<Client> getAllClients() {
         return clientService.findAll();
-
-//    public List<Client> allClients(HttpServletRequest httpServletRequest) {
-//    String authenticationHeader = httpServletRequest.getHeader("Authentication");
-//    String bearer = authenticationHeader.replace("Bearer ", "");
-//    if (clientDAO.existsClientByLoginToken(bearer)){
-//        return clientDAO.findAll();
-//    }
-//    return null;
-}
+    }
 
     @PatchMapping
     public Client editClient(@RequestBody Client clientFromRequest) {
-        Optional<Client> clientFromDB = clientService.findById(clientFromRequest.getClientId());
-        return clientService.save(clientFromRequest);
+       return clientService.editClient(clientFromRequest);
     }
 
     @DeleteMapping("/{id}")
@@ -60,13 +47,13 @@ public class ClientController {
 
     @GetMapping("/{id}/orders")
     public List<Order> getClientsOrders(@PathVariable int id) {
-        return clientService.findById(id).get().getOrders();
+        return clientService.findOrdersByClientId(id);
     }
-
-    @GetMapping("/{id}/wishList")
-    public WishList getClientsWishList(@PathVariable int id) {
-        return clientService.findById(id).get().getWishlist();
-    }
+//
+//    @GetMapping("/{id}/wishList")
+//    public WishList getClientsWishList(@PathVariable int id) {
+//        return clientService.findById(id).get().getWishlist();
+//    }
 
 //    @PostMapping("/registration")
 //    public void clientRegistration(@RequestBody Client client) {
